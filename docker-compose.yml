@@ -1,0 +1,18 @@
+version: "3"
+services:
+  redis:
+    image: redis
+    container_name : redis
+    restart: always
+    ports:
+      - 6379:6379
+  metar:
+    build: .
+    container_name: metar
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
+    restart: always
+    depends_on:
+      - redis
